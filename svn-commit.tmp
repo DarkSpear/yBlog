@@ -1,0 +1,14 @@
+added design
+
+--This line, and those below, will be ignored--
+
+AM   db
+AM   static/images/rss_icon.png
+AM   static/images/email_icon.png
+D    static/images/email_icon.jpeg
+D    static/images/rss_Icon.gif
+AM   static/images/twitter_icon.png
+D    static/images/twitter_icon.jpeg
+M    static/css/style.css
+M    templates/blog/list.html
+M    templates/base.html

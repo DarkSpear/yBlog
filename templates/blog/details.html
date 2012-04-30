@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% if blog_post_details.published %}
+{% block title %}{{ block.super }} {{ blog_post_details.title }}{% endblock %}
+{% block meta %}
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+{% endblock %}
+{% block content %}
+<h1 class="detailed_title">
+    {{ blog_post_details.title }}
+</h1>
+<br />
+<p class="detailed_text">
+    {{ blog_post_details.text|safe }}
+</p>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="kvarkson">Tweet</a>
+<div class="comments">
+    <h3>Comments</h3>
+    {% load comments %}
+    {% get_comment_list for frontend.record blog_post_details.id as comment_list %}
+    {% for comment in comment_list %}
+        <p>Posted by: {{ comment.user_name }} on {{ comment.submit_date }}</p>
+        <p>Comment: {{ comment.comment }}</p>
+    {% endfor %}
+    <a href="#comments-form-show" id="comments-form-show">Write a comment</a>
+    <div id="comments-form">
+        {% render_comment_form for blog_post_details %}
+    </div>
+</div>
+
+{% endblock %}
+{% endif %}

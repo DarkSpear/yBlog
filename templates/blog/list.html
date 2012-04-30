@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}{{ block.super }} Последние посты{% endblock %}
+{% block content %}
+{% for blog_post in blog_posts.object_list %}
+{% if blog_post.published %}
+<div class="blog_post_header">
+    <a href="/details?id={{ blog_post.id }}" class="blog_post_link">
+        {{ blog_post.title }}
+    </a> | <span>{{ blog_post.pub_date }}</span>
+</div>
+<div class="blog_post_text"><p class="cut-text">{{ blog_post.cut|safe }}
+<a href="/details?id={{ blog_post.id }}" class="blog_post_link"><strong>&nbsp;&nbsp;&nbsp;Читать далее...</strong></a>
+</p>
+<br />
+<br />
+<br />
+<br />
+<hr />
+<br />
+</div>
+{% endif %}
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if blog_posts.has_previous %}
+        <a href="?page={{ blog_posts.previous_page_number }}">Назад</a>
+        {% endif %}
+
+        {% for page in blog_posts.paginator.page_range %}
+            {% ifequal page blog_posts.number %}
+                {% if page != 1 %}
+                <span class="current">
+                    {{ page }}
+                </span>
+                {% endif %}
+            {% else %}
+                <span class="page-link">
+                    <a href="/?page={{ page }}">{{ page }}</a>
+                </span>
+            {% endifequal %}
+            &nbsp;
+        {% endfor %}
+        {% if blog_posts.has_next %}
+        <a href="?page={{ blog_posts.next_page_number }}">Вперед</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

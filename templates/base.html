@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>yBlog | {% block title %}{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="kvarkson, блог кварксона, блог kvarkson, управление, человеческие ресурсы, совершенствование, развитие, гибкие методологии, команды разработчиков, здоровый образ жизни" name="keywords" />
+    <meta
+	content="Блог Kvarkson'a об управлении проектами, человеческими ресурсами и проектными командами, здоровом образе жизни , самосовершенствовании и развитии личности." name="description" />
+    <base href="http://kvarkson.com/" />
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ui-lightness/jquery-ui-1.8.14.custom.css" />
+    <script src="/js/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="/js/common.js" type="text/javascript"></script>
+    <script src="/js/jquery-ui-1.8.14.custom.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+	</script>
+    {% block meta %}
+    {% endblock %}
+  </head>
+  <body>
+      <div class="header">
+          <a href="/">
+              <img src="/images/kvarkson_logo.png" /><b>yBlog</b>
+          </a>
+          <div class="media_block">
+              <span class="contacts"><b>Контакты и подписки</b></span>
+              <a class="twitter_link" href="http://twitter.com/#!/kvarkson" target="_blank">
+                      <img src="/images/twitter_icon.png" />
+              </a>
+              <a class="facebook_link" href="http://www.facebook.com/profile.php?id=100002405497468" target="_blank">
+                      <img src="/images/facebook_icon.png" />
+              </a>
+              <a class="linkedin_link" href="http://ua.linkedin.com/pub/stas-gorodnichenko/33/5a6/225" target="_blank">
+                      <img src="/images/linkedin_icon.png" />
+              </a>
+              <a class="twitter_link" href="/feed/" target="_blank">
+                      <img src="/images/rss_icon.png" />
+              </a>
+              <a class="mail_link" href="mailto:kvarkson@gmail.com" target="_blank">
+                      <img src="/images/email_icon.png" />
+              </a>
+          </div>
+          <h2>Изучаю, применяю, анализирую, делюсь</h2>
+      </div>
+      <div class="top_menu">
+          {% block top_menu %}
+              <a href="/"><b>Лента</b></a>
+              {% if 0 %}<a href="/about/"><b>Автор</b></a>{% endif %}
+          {% endblock %}
+      </div>
+      <div class="content">
+          {% block content %}
+          {% endblock %}
+      </div>
+      <div class="right_menu">
+          <div class="menu_block search_box">
+              <div class="menu_header">Поиск</div>
+              <form action="/" method="get">
+                  <input type="text" name="search_string" class="input_text" />
+                  <input type="submit" name="search_button" value="Найти" />
+              </form>
+              
+          </div>
+          <div class="menu_block">
+              <div class="menu_header">Последние статьи</div>
+              {% block last_articles %}
+                {% for blog_post in last_posts %}
+                    {% if blog_post.published %}
+                        <a href="/details?id={{ blog_post.id }}">{{ blog_post.title }}</a>
+                    {% endif %}
+                {% endfor %}
+              {% endblock %}
+          </div>
+          <div class="menu_block">
+              <div class="menu_header">Категории</div>
+              {% block categories %}
+                {% for category in categories %}
+                    <a href="/?cat={{ category.id }}">{{ category.title }}</a>
+                {% endfor %}
+              {% endblock %}
+          </div>
+      </div>
+      <div class="footer">
+          {% block footer %}
+          {% endblock %}
+          <div class="copyright">
+            Copyright &copy; 2012 yBlog
+          </div>
+      </div>
+  </body>
+</html>
