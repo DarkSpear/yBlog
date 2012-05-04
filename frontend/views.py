@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from frontend.models import Record, Categories
+from frontend.models import Record, Category
 from django.shortcuts import render_to_response
 
 
@@ -7,7 +7,7 @@ from django.shortcuts import render_to_response
 # If a user pics a category the list filters by it
 # If a user searches something the list filters by it
 def listing(request):
-    categories = Categories.objects.all()
+    categories = Category.objects.all()
     last_posts = Record.objects.order_by('-pub_date')[:3]
 
     if request.GET.get('cat'):
@@ -34,7 +34,7 @@ def listing(request):
     return render_to_response('blog/list.html', {"blog_posts": blog_posts, 'categories': categories, 'last_posts': last_posts,})
 
 def details(request):
-    categories = Categories.objects.all()
+    categories = Category.objects.all()
     last_posts = Record.objects.order_by('-pub_date')[:3]
 
     try:
